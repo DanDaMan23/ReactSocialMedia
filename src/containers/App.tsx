@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
+import {Route, Switch, Redirect} from 'react-router-dom';
 
 import Posts from '../components/Posts/Posts';
 import NewPost from '../components/Posts/NewPost/newPost';
+import NavBar from './NavBar';
 
 import {PostProps} from '../postInterface';
 
@@ -14,11 +16,29 @@ const App:React.FC = () => {
     console.log(posts);
   }
 
-
-  return (
+  const postsRoute = (
     <div className="container">
       <NewPost onNewPost={newPostHandler} />
       <Posts allPosts={posts} />
+    </div>
+  );
+
+
+  return (
+    <div>
+      <NavBar />
+      <Switch>
+        <Route path="/posts">
+          {postsRoute}
+        </Route>
+        <Route path="/home">
+          <h1>Homepage</h1>
+        </Route>
+        <Redirect to="/home" />
+      </Switch>
+
+
+
     </div>
   );
 }
