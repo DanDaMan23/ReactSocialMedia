@@ -11,6 +11,22 @@ const App:React.FC = () => {
 
   const [posts, setPosts] = useState<PostProps[]>([]);
 
+  useEffect(() => {
+    fetch('https://social-media-react-37340-default-rtdb.firebaseio.com/posts.json')
+      .then(response => response.json())
+      .then(responseData => {
+        // console.log(responseData[0]);
+        for (const key in responseData) {
+          let title = responseData[key].title;
+          let description = responseData[key].description;
+          // let comments = responseData[key].comments;
+          setPosts(prevPosts => [...prevPosts, {id: key, title: title, description: description, comments: []}]);
+        }
+
+      });
+  }, []);
+
+
   const newPostHandler = (title: string, description: string) => {
     setPosts(prevPosts => [...prevPosts, {id: Math.random().toString(), title: title, description: description, comments: []}]);
     postSaveInDatabase(title, description);
