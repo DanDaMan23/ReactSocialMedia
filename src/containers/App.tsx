@@ -58,7 +58,6 @@ const App:React.FC = () => {
     </div>
   );
 
-
   return (
     <div>
       <NavBar />
