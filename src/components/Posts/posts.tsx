@@ -16,7 +16,7 @@ const Posts: React.FC<PostsProps> = props => {
                     (<li className="list-group-item" key={post.id}>
                         <h3>{post.title}</h3>
                         <p>{post.description}</p>
-                        <button onClick={props.deletePost.bind(null, post.id)} className="btn btn-danger">DELETE</button>
+                        <button onClick={props.deletePost.bind(null, post.id)} className="btn btn-danger">DELETE POST</button>
                     </li>)
                 )}
             </ul>
