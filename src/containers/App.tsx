@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
 
-import Posts from '../components/Posts/Posts';
+import Posts from '../components/Posts/posts';
 import NewPost from '../components/Posts/NewPost/newPost';
 import NavBar from './NavBar';
 
