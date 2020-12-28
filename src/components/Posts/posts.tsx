@@ -4,6 +4,7 @@ import {PostProps} from '../../postInterface';
 
 interface PostsProps {
     allPosts: PostProps[];
+    deletePost: (postId: string) => void;
 }
 
 const Posts: React.FC<PostsProps> = props => {
@@ -15,6 +16,7 @@ const Posts: React.FC<PostsProps> = props => {
                     (<li className="list-group-item" key={post.id}>
                         <h3>{post.title}</h3>
                         <p>{post.description}</p>
+                        <button onClick={props.deletePost.bind(null, post.id)}>DELETE</button>
                     </li>)
                 )}
             </ul>

@@ -18,18 +18,17 @@ const App:React.FC = () => {
         for (const key in responseData) {
           let title = responseData[key].title;
           let description = responseData[key].description;
-          // let comments = responseData[key].comments;
           setPosts(prevPosts => [...prevPosts, {id: key, title: title, description: description, comments: []}]);
         }
 
       });
   }, []);
 
-  const newPostHandler = (title: string, description: string) => {
+  const newPostHandler = (title: string, description: string): void => {
     postSaveInDatabase(title, description);
   }
 
-  const postSaveInDatabase = (title: string, description: string) => {
+  const postSaveInDatabase = (title: string, description: string): void => {
     fetch('https://social-media-react-37340-default-rtdb.firebaseio.com/posts.json', {
       method: 'POST',
       body: JSON.stringify({username: "Unknown", title: title, description: description, comments: []}),
@@ -40,10 +39,22 @@ const App:React.FC = () => {
     });
   }
 
-  const postsRoute = (
+  const deletePostInDatabase = (postId: string): void => {
+    fetch(`https://social-media-react-37340-default-rtdb.firebaseio.com/posts/${postId}.json`, {
+      method: 'DELETE'
+    }).then(() => {
+      console.log('removed');
+    } ).catch((err) => {
+      console.error(err);
+    });
+    setPosts(prevPosts => prevPosts.filter(post => post.id !== postId) );
+    console.log(postId);
+  }
+
+  const postsRoute: JSX.Element = (
     <div className="container">
       <NewPost onNewPost={newPostHandler} />
-      <Posts allPosts={posts} />
+      <Posts allPosts={posts} deletePost={deletePostInDatabase} />
     </div>
   );
 
