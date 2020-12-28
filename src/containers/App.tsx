@@ -15,7 +15,6 @@ const App:React.FC = () => {
     fetch('https://social-media-react-37340-default-rtdb.firebaseio.com/posts.json')
       .then(response => response.json())
       .then(responseData => {
-        // console.log(responseData[0]);
         for (const key in responseData) {
           let title = responseData[key].title;
           let description = responseData[key].description;
@@ -26,11 +25,8 @@ const App:React.FC = () => {
       });
   }, []);
 
-
   const newPostHandler = (title: string, description: string) => {
-    setPosts(prevPosts => [...prevPosts, {id: Math.random().toString(), title: title, description: description, comments: []}]);
     postSaveInDatabase(title, description);
-    console.log(posts);
   }
 
   const postSaveInDatabase = (title: string, description: string) => {
@@ -38,7 +34,10 @@ const App:React.FC = () => {
       method: 'POST',
       body: JSON.stringify({username: "Unknown", title: title, description: description, comments: []}),
       headers: {'Content-Type': 'application/json'}
-    }).then(response => response.json() );
+    }).then(response => response.json() )
+    .then(responseData => {
+      setPosts(prevPosts => [...prevPosts, {id: responseData['name'], title: title, description: description, comments: []}]);
+    });
   }
 
   const postsRoute = (
