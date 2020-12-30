@@ -7,8 +7,9 @@ interface PostsProps {
     deletePost: (postId: string) => void;
 }
 
-const Posts: React.FC<PostsProps> = props => {
 
+
+const Posts: React.FC<PostsProps> = props => {
     return (
         <div>
             <ul className="list-group">

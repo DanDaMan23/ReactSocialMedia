@@ -73,7 +73,7 @@ const App:React.FC = () => {
           <LoginPage />
         </Route>
 
-        <Redirect to="/home" />
+        <Redirect to="/login" />
       </Switch>
 
 
