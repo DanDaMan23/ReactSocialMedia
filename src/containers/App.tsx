@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
+import {Route, Switch, Redirect, Link} from 'react-router-dom';
 
 import Posts from '../components/Posts/posts';
 import NewPost from '../components/Posts/NewPost/newPost';
@@ -63,7 +63,11 @@ const App:React.FC = () => {
       <NavBar />
       <Switch>
         <Route path="/posts">
-          {postsRoute}
+          {sessionStorage.username ? postsRoute : () => (
+            <div className="container">
+              Click the link to <Link to="/login">Login</Link>
+            </div>
+          )}
         </Route>
         <Route path="/home">
           <h1>Homepage</h1>

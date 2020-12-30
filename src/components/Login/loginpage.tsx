@@ -14,7 +14,7 @@ const LoginPage: React.FC = props => {
         <form className="container" onSubmit={onSubmitHandler}>
             <div>
                 <label htmlFor="username">Username</label>
-                <input className="form-control" type="text" name="username" id="username" ref={usernameRef}/>
+                <input className="form-control" type="text" name="username" id="username" ref={usernameRef} required/>
             </div>
             <br/>
             <button type="submit" className="btn btn-primary">Login</button>

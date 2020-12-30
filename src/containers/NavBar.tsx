@@ -20,6 +20,14 @@ const NavBar: React.FC = (props) => {
     </div>
   );
 
+  const loginLink = (
+    <div className="navbar-nav">
+      <Link to="/login" className="nav-link">
+        Login
+      </Link>
+    </div>
+  )
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -40,6 +48,7 @@ const NavBar: React.FC = (props) => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             {sessionStorage.username && links}
+            {!sessionStorage.username && loginLink}
           </div>
         </div>
       </nav>
