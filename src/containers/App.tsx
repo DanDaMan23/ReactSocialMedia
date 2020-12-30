@@ -4,6 +4,7 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import Posts from '../components/Posts/posts';
 import NewPost from '../components/Posts/NewPost/newPost';
 import NavBar from './NavBar';
+import LoginPage from '../components/Login/loginpage';
 
 import {PostProps} from '../postInterface';
 
@@ -68,6 +69,10 @@ const App:React.FC = () => {
         <Route path="/home">
           <h1>Homepage</h1>
         </Route>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+
         <Redirect to="/home" />
       </Switch>
 
