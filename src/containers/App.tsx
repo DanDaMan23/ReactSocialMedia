@@ -19,9 +19,8 @@ const App:React.FC = () => {
         for (const key in responseData) {
           let title = responseData[key].title;
           let description = responseData[key].description;
-          setPosts(prevPosts => [...prevPosts, {id: key, title: title, description: description, comments: []}]);
+          setPosts(prevPosts => [...prevPosts, {id: key, username: sessionStorage.username, title: title, description: description, comments: []}]);
         }
-
       });
   }, []);
 
@@ -36,7 +35,7 @@ const App:React.FC = () => {
       headers: {'Content-Type': 'application/json'}
     }).then(response => response.json() )
     .then(responseData => {
-      setPosts(prevPosts => [...prevPosts, {id: responseData['name'], title: title, description: description, comments: []}]);
+      setPosts(prevPosts => [...prevPosts, {id: responseData['name'], username: sessionStorage.username, title: title, description: description, comments: []}]);
     });
   }
 

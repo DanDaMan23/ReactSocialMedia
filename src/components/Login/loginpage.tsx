@@ -1,7 +1,5 @@
 import React, {useRef} from 'react';
 
-import { Redirect } from 'react-router-dom';
-
 const LoginPage: React.FC = props => {
 
     const usernameRef = useRef<HTMLInputElement>(null);
