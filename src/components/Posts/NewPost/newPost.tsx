@@ -18,9 +18,9 @@ const NewPost: React.FC<NewPostProps> = props => {
         <form onSubmit={onSubmitHandler}>
             <div>
                 <label htmlFor="title">Title</label>
-                <input className="form-control" type="text" name="title" id="title" ref={titleInputRef}/>
+                <input className="form-control" type="text" name="title" id="title" ref={titleInputRef} required/>
                 <label htmlFor="description">Description</label>
-                <textarea className="form-control" id="description" ref={descriptionInputRef}></textarea>
+                <textarea className="form-control" id="description" ref={descriptionInputRef} required></textarea>
             </div>
             <br/>
             <button type="submit" className="btn btn-primary">POST</button>

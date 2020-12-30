@@ -2,6 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NavBar: React.FC = (props) => {
+
+  const logoutLink = <Link to="/login" onClick={() => {
+    sessionStorage.removeItem('username');
+    window.location.href = '/login';
+  } } className="nav-link">Logout</Link>;
+
+  const links = (
+    <div className="navbar-nav">
+      <Link to="/" className="nav-link">
+        Home
+      </Link>
+      <Link to="/posts" className="nav-link">
+        Posts
+      </Link>
+      {logoutLink}
+    </div>
+  );
+
+  const loginLink = (
+    <div className="navbar-nav">
+      <Link to="/login" className="nav-link">
+        Login
+      </Link>
+    </div>
+  )
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -21,14 +47,8 @@ const NavBar: React.FC = (props) => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <Link to="/" className="nav-link">
-                Home
-              </Link>
-              <Link to="/posts" className="nav-link">
-                Posts
-              </Link>
-            </div>
+            {sessionStorage.username && links}
+            {!sessionStorage.username && loginLink}
           </div>
         </div>
       </nav>

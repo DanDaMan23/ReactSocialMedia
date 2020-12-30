@@ -1,6 +1,7 @@
 import React from 'react';
 
-const homepage: React.FC = props => {
+
+const Homepage: React.FC = props => {
     return (
         <div>
             <h1>Homepage</h1>
@@ -8,4 +9,4 @@ const homepage: React.FC = props => {
     );
 }
 
-export default homepage;
+export default Homepage;

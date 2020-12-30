@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
+import {Route, Switch, Redirect, Link} from 'react-router-dom';
 
 import Posts from '../components/Posts/posts';
 import NewPost from '../components/Posts/NewPost/newPost';
 import NavBar from './NavBar';
+import LoginPage from '../components/Login/loginpage';
 
 import {PostProps} from '../postInterface';
 
@@ -18,9 +19,8 @@ const App:React.FC = () => {
         for (const key in responseData) {
           let title = responseData[key].title;
           let description = responseData[key].description;
-          setPosts(prevPosts => [...prevPosts, {id: key, title: title, description: description, comments: []}]);
+          setPosts(prevPosts => [...prevPosts, {id: key, username: sessionStorage.username, title: title, description: description, comments: []}]);
         }
-
       });
   }, []);
 
@@ -35,7 +35,7 @@ const App:React.FC = () => {
       headers: {'Content-Type': 'application/json'}
     }).then(response => response.json() )
     .then(responseData => {
-      setPosts(prevPosts => [...prevPosts, {id: responseData['name'], title: title, description: description, comments: []}]);
+      setPosts(prevPosts => [...prevPosts, {id: responseData['name'], username: sessionStorage.username, title: title, description: description, comments: []}]);
     });
   }
 
@@ -63,12 +63,20 @@ const App:React.FC = () => {
       <NavBar />
       <Switch>
         <Route path="/posts">
-          {postsRoute}
+          {sessionStorage.username ? postsRoute : () => (
+            <div className="container">
+              Click the link to <Link to="/login">Login</Link>
+            </div>
+          )}
         </Route>
         <Route path="/home">
           <h1>Homepage</h1>
         </Route>
-        <Redirect to="/home" />
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+
+        <Redirect to="/login" />
       </Switch>
 
 
