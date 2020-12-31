@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, createContext} from 'react';
 import {Route, Switch, Redirect, Link} from 'react-router-dom';
 
 import Posts from '../components/Posts/posts';
@@ -7,7 +7,8 @@ import NavBar from './NavBar';
 import LoginPage from '../components/Login/loginpage';
 
 import {PostProps} from '../postInterface';
-import {CommentInterface} from '../commentInterface';
+
+import {CommentContext} from '../context/commentContext';
 
 const App:React.FC = () => {
 
@@ -55,19 +56,18 @@ const App:React.FC = () => {
   }
 
   const addComment = (postId: string, username: string, comment: string): void => {
-    fetch(`https://social-media-react-37340-default-rtdb.firebaseio.com/posts/${postId}.json`, {
-      method: 'PATCH',
-      body: JSON.stringify({comments: []}),
+    fetch(`https://social-media-react-37340-default-rtdb.firebaseio.com/posts/${postId}/comments.json`, {
+      method: 'POST',
+      body: JSON.stringify({username: username, comment: comment}),
       headers: {'Content-Type': 'application/json'}
     }).then(response => response.json() )
     .then(json => console.log(json) );
   }
 
-
   const postsRoute: JSX.Element = (
     <div className="container">
       <NewPost onNewPost={newPostHandler} />
-      <Posts allPosts={posts} deletePost={deletePostInDatabase} />
+      <Posts allPosts={posts} deletePost={deletePostInDatabase} addComment={addComment} />
     </div>
   );
 
