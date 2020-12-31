@@ -12,6 +12,8 @@ const NewPost: React.FC<NewPostProps> = props => {
     const onSubmitHandler = (event:React.FormEvent) => {
         event.preventDefault();
         props.onNewPost(titleInputRef.current!.value, descriptionInputRef.current!.value);
+        titleInputRef.current!.value = "";
+        descriptionInputRef.current!.value = "";
     }
 
     return (
