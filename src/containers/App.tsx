@@ -17,9 +17,10 @@ const App:React.FC = () => {
       .then(response => response.json())
       .then(responseData => {
         for (const key in responseData) {
+          let username = responseData[key].username;
           let title = responseData[key].title;
           let description = responseData[key].description;
-          setPosts(prevPosts => [...prevPosts, {id: key, username: sessionStorage.username, title: title, description: description, comments: []}]);
+          setPosts(prevPosts => [...prevPosts, {id: key, username: username, title: title, description: description, comments: []}]);
         }
       });
   }, []);
@@ -31,7 +32,7 @@ const App:React.FC = () => {
   const postSaveInDatabase = (title: string, description: string): void => {
     fetch('https://social-media-react-37340-default-rtdb.firebaseio.com/posts.json', {
       method: 'POST',
-      body: JSON.stringify({username: "Unknown", title: title, description: description, comments: []}),
+      body: JSON.stringify({username: sessionStorage.username, title: title, description: description, comments: []}),
       headers: {'Content-Type': 'application/json'}
     }).then(response => response.json() )
     .then(responseData => {
