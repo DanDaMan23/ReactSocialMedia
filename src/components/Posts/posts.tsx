@@ -15,7 +15,7 @@ const Posts: React.FC<PostsProps> = props => {
     return (
         <div>
             <ul className="list-group">
-                {props.allPosts.map(post => <Post post={post} deletePost={props.deletePost} />)}
+                {props.allPosts.map(post => <Post key={post.id} post={post} deletePost={props.deletePost} />)}
             </ul>
         </div>
     );

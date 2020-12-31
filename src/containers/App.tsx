@@ -7,6 +7,7 @@ import NavBar from './NavBar';
 import LoginPage from '../components/Login/loginpage';
 
 import {PostProps} from '../postInterface';
+import {CommentInterface} from '../commentInterface';
 
 const App:React.FC = () => {
 
@@ -36,6 +37,7 @@ const App:React.FC = () => {
       headers: {'Content-Type': 'application/json'}
     }).then(response => response.json() )
     .then(responseData => {
+      console.log(responseData['comments']);
       setPosts(prevPosts => [...prevPosts, {id: responseData['name'], username: sessionStorage.username, title: title, description: description, comments: []}]);
     });
   }
@@ -51,6 +53,16 @@ const App:React.FC = () => {
     setPosts(prevPosts => prevPosts.filter(post => post.id !== postId) );
     console.log(postId);
   }
+
+  const addComment = (postId: string, username: string, comment: string): void => {
+    fetch(`https://social-media-react-37340-default-rtdb.firebaseio.com/posts/${postId}.json`, {
+      method: 'PATCH',
+      body: JSON.stringify({comments: []}),
+      headers: {'Content-Type': 'application/json'}
+    }).then(response => response.json() )
+    .then(json => console.log(json) );
+  }
+
 
   const postsRoute: JSX.Element = (
     <div className="container">

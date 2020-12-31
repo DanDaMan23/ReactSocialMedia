@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Comment: React.FC = props => {
+const NewComment: React.FC = props => {
     return (
         <div>
 
@@ -8,7 +8,7 @@ const Comment: React.FC = props => {
     );
 }
 
-export default Comment;
+export default NewComment;
 
 
 
