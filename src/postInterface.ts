@@ -3,5 +3,5 @@ export interface PostProps {
     username: string;
     title: string;
     description: string;
-    comments: {id: string, comments: string}[];
+    comments: {id: string, username: string, comment: string}[];
 }
