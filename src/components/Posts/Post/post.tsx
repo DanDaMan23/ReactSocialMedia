@@ -17,6 +17,7 @@ const Post: React.FC<PostPorps> = props => {
             <h3>{props.post.title}</h3>
             <p>{props.post.description}</p>
             <button onClick={props.deletePost.bind(null, props.post.id)} className="btn btn-danger">DELETE POST</button>
+            <NewComment addComment={props.addComment} />
         </li>
     );
 };
