@@ -22,7 +22,8 @@ const App:React.FC = () => {
           let username = responseData[key].username;
           let title = responseData[key].title;
           let description = responseData[key].description;
-          setPosts(prevPosts => [...prevPosts, {id: key, username: username, title: title, description: description, comments: []}]);
+          let comments = responseData[key].comments ? responseData[key].comments : [];
+          setPosts(prevPosts => [...prevPosts, {id: key, username: username, title: title, description: description, comments: comments}]);
         }
       });
   }, []);
@@ -38,7 +39,6 @@ const App:React.FC = () => {
       headers: {'Content-Type': 'application/json'}
     }).then(response => response.json() )
     .then(responseData => {
-      console.log(responseData['comments']);
       setPosts(prevPosts => [...prevPosts, {id: responseData['name'], username: sessionStorage.username, title: title, description: description, comments: []}]);
     });
   }
@@ -61,7 +61,20 @@ const App:React.FC = () => {
       body: JSON.stringify({username: username, comment: comment}),
       headers: {'Content-Type': 'application/json'}
     }).then(response => response.json() )
-    .then(json => console.log(json) );
+    .then(json => {
+      // let currentPost = posts.find(post => post.id === postId);
+      // currentPost!.comments.push({id: json, username: username, comment: comment});
+      // console.log(currentPost!.comments);
+
+      // setPosts(prevPosts => {
+      //   let editedPosts = prevPosts;
+      //   let currPost = editedPosts.find(post => post.id === postId);
+      //   let currComments = currPost!.comments ? currPost!.comments : [];
+      //   currComments.push({id: postId, username: username, comment: comment});
+      //   return editedPosts;
+      // });
+
+    } );
   }
 
   const postsRoute: JSX.Element = (

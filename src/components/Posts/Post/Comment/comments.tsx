@@ -1,9 +1,13 @@
 import React from 'react';
 
-const Comments: React.FC = props => {
+interface CommentsProps {
+    comments: [];
+}
+
+const Comments: React.FC<CommentsProps> = props => {
     return (
         <div>
-
+            
         </div>
     );
 }
